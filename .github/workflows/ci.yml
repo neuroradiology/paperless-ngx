@@ -186,6 +186,13 @@ jobs:
           node-version: 20.x
           cache: 'npm'
           cache-dependency-path: 'src-ui/package-lock.json'
+      - name: Cache node modules
+        id: cache-npm
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: npm-${{ hashFiles('src-ui/package-lock.json') }}
+          restore-keys: npm-
       -
         name: Install dependencies
         run: cd src-ui && npm ci
@@ -213,6 +220,21 @@ jobs:
           node-version: 20.x
           cache: 'npm'
           cache-dependency-path: 'src-ui/package-lock.json'
+      - name: Cache node modules
+        id: cache-npm
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: npm-${{ hashFiles('src-ui/package-lock.json') }}
+          restore-keys: npm-
+      -
+        name: Install dependencies
+        if: steps.cache-npm.outputs.cache-hit != 'true'
+        run: cd src-ui && npm ci
+      -
+        name: Install Playwright
+        if: steps.cache-npm.outputs.cache-hit != 'true'
+        run: cd src-ui && npx playwright install --with-deps
       -
         name: Linting checks
         run: cd src-ui && npm run lint
