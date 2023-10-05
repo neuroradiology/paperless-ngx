@@ -427,6 +427,7 @@ jobs:
           retention-days: 7
 
   build-release:
+    name: "Build Release"
     needs:
       - build-docker-image
     runs-on: ubuntu-22.04
@@ -536,6 +537,7 @@ jobs:
           retention-days: 7
 
   publish-release:
+    name: "Publish Release"
     runs-on: ubuntu-22.04
     outputs:
       prerelease: ${{ steps.get_version.outputs.prerelease }}
@@ -585,6 +587,7 @@ jobs:
           asset_content_type: application/x-xz
 
   append-changelog:
+    name: "Append Changelog"
     runs-on: ubuntu-22.04
     needs:
       - publish-release
