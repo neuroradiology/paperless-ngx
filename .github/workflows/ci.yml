@@ -191,7 +191,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ~/.npm
-          key: ${{ runner.os }}-npm-${{ hashFiles('src-ui/package-lock.json') }}
+          key: ${{ runner.arch }}-npm-${{ hashFiles('src-ui/package-lock.json') }}
       -
         name: Install dependencies
         run: cd src-ui && npm ci
@@ -224,7 +224,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ~/.npm
-          key: ${{ runner.os }}-npm-${{ hashFiles('src-ui/package-lock.json') }}
+          key: ${{ runner.arch }}-npm-${{ hashFiles('src-ui/package-lock.json') }}
       -
         name: Install dependencies
         if: steps.cache-npm.outputs.cache-hit != 'true'
