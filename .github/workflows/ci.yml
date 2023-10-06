@@ -234,14 +234,6 @@ jobs:
       - name: Re-link Angular cli
         run: cd src-ui && npm link @angular/cli
       -
-        name: Install dependencies
-        if: steps.cache-frontend-deps.outputs.cache-hit != 'true'
-        run: cd src-ui && npm ci
-      -
-        name: Install Playwright
-        if: steps.cache-frontend-deps.outputs.cache-hit != 'true'
-        run: cd src-ui && npx playwright install --with-deps
-      -
         name: Linting checks
         run: cd src-ui && npm run lint
       -
