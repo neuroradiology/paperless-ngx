@@ -229,6 +229,8 @@ jobs:
             ~/.npm
             ~/.cache
           key: ${{ runner.name }}-frontenddeps-${{ hashFiles('src-ui/package-lock.json') }}
+      - name: Re-link Angular cli
+        run: cd src-ui && npm link @angular/cli
       -
         name: Install dependencies
         if: steps.cache-npm.outputs.cache-hit != 'true'
